@@ -1,10 +1,12 @@
 ;; TODO : allow application to be the very first thing looked at
 ;; 
+;; The problem with call is we need it everywhere
+;;
 ;; (define (append a b)
 ;;   (if (call null? a)
 ;;       b
 ;;       (call cons (call car a)
-;;                  (call append '(1 2) '(3 4)))))
+;;                  (call append (call cdr a) b))))
 
 (define apply-in-underlying-scheme apply)
 (define eval-in-underlying-scheme eval)
@@ -282,7 +284,11 @@
   (list (list 'car car)
         (list 'cdr cdr)
         (list 'cons cons)
-        (list 'null? null?)))
+        (list 'null? null?)
+        (list '+ +)
+        (list '- -)
+        (list '* *)
+        (list '/ /)))
 
 (define (primitive-procedure-names)
   (map car primitive-procedures))
