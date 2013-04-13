@@ -341,3 +341,9 @@
         (assign b (reg t))
         (goto (label test-b))
       gcd-done)))
+
+(define (run-gcd-machine)
+  (set-register-contents! gcd-machine 'a 206)
+  (set-register-contents! gcd-machine 'b 40)
+  (start gcd-machine)
+  (get-register-contents gcd-machine 'a))
