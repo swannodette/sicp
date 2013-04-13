@@ -65,6 +65,12 @@
         (else (error "Uknown request -- STACK" message))))
     dispatch))
 
+(define (pop stack)
+  (stack 'pop))
+
+(define (push stack value)
+  ((stack 'push) value))
+
 (define (start machine)
   (machine 'start))
 
