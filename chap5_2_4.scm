@@ -368,7 +368,7 @@
   (start gcd-machine)
   (get-register-contents gcd-machine 'a))
 
-(define factorial-machine
+(define fact-machine
   (make-machine
     '(n val continue)
     (list (list '* *) (list '- -) (list '= =))
@@ -390,3 +390,14 @@
         (assign val (const 1))
         (goto (reg continue))
       fact-done)))
+
+(define (run-fact-machine)
+  (set-register-contents! fact-machine 'n 5)
+  (start fact-machine)
+  (get-register-contents fact-machine 'val))
+
+(define fib-machine
+  '())
+
+(define (run-fib-machine)
+  '())
