@@ -55,7 +55,7 @@
   (get-contents (get-register machine register-name)))
 
 (define (set-register-contents! machine register-name value)
-  (set-contents! (get-register machine register-anme) value)
+  (set-contents! (get-register machine register-name) value)
   'done)
 
 (define (get-register machine reg-name)
@@ -93,7 +93,7 @@
       (define (dispatch message)
         (cond
           ((eq? message 'start)
-           (set-content! pc the-instruction-sequence)
+           (set-contents! pc the-instruction-sequence)
            (execute))
           ((eq? message 'install-instruction-sequence)
            (lambda (seq) (set! the-instruction-sequence seq)))
@@ -190,7 +190,7 @@
               (make-primitive-exp
                 (car value-exp) machine labels))))
       (lambda ()
-        (set-content! target (value-proc))
+        (set-contents! target (value-proc))
         (advance-pc pc)))))
 
 (define (assign-reg-name assign-instruction)
@@ -200,7 +200,7 @@
   (cddr assign-instruction))
 
 (define (advance-pc pc)
-  (set-content! pc (cdr (get-contents pc))))
+  (set-contents! pc (cdr (get-contents pc))))
 
 (define (make-test inst machine labels operations flag pc)
   (let ((condition (test-condition inst)))
@@ -209,7 +209,7 @@
               (make-operation-exp
                 condition machine labels operations)))
         (lambda ()
-          (set-content! flag (condition-proc))
+          (set-contents! flag (condition-proc))
           (advance-pc pc)))
       (error "Bad TEST instruction -- ASSEMBLE" inst))))
 
