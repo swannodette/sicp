@@ -420,7 +420,7 @@
         (restore continue)
         (assign n (op -) (reg n) (const 2))
         (save continue)
-        (assign continue (label after-fib-n-2))
+        (assign continue (label afterfib-n-2))
         (save val)
         (goto (label fib-loop))
       afterfib-n-2
@@ -435,6 +435,11 @@
       fib-done)))
 
 (define (run-fib-machine)
-  (set-register-contents! fib-machine 'n 5)
+  (set-register-contents! fib-machine 'n 3)
   (start fib-machine)
   (get-register-contents fib-machine 'val))
+
+(define (fib n)
+  (if (< n 2)
+    n
+    (+ (fib (- n 1)) (fib (- n 2)))))
